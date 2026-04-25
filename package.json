@@ -1,0 +1,22 @@
+{
+  "name": "socket-flow",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "concurrently \"pnpm --dir server dev\" \"pnpm --dir client dev -- --host 0.0.0.0\"",
+    "dev:server": "pnpm --dir server dev",
+    "dev:client": "pnpm --dir client dev -- --host 0.0.0.0",
+    "build": "pnpm --dir client build && pnpm --dir server build",
+    "verify": "pnpm --dir client lint && pnpm build",
+    "smoke": "node scripts/smoke-test.mjs",
+    "desktop:prepare": "pnpm build && npm --prefix desktop run prepare-assets",
+    "desktop:start": "pnpm build && npm --prefix desktop run start",
+    "desktop:pack:mac": "pnpm build && npm --prefix desktop run pack:mac",
+    "desktop:pack:win": "pnpm build && npm --prefix desktop run pack:win",
+    "start": "pnpm --dir server start"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "ws": "^8.20.0"
+  }
+}
